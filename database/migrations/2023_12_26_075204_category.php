@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('datamodels', function (Blueprint $table) {
+        Schema::create('category', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id')->nullable(); 
             $table->string('name');
-            $table->string('harga');
             $table->dateTime('updated_at');
             $table->dateTime('created_at');
         });
+
     }
 
     /**
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('datamodels');
+        Schema::dropIfExists('category');
     }
 };

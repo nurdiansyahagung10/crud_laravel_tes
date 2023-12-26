@@ -11,7 +11,8 @@
     sort by
   </button>
   <ul class="dropdown-menu">
-        <li><form action="{{ route('data.index') }}" method="get" class="dropdown-item">@csrf<button class="bg-transparent border-0 w-100 text-left" type="submit">all</button></form></li>
+            <li><a href="{{ route('data.index') }}" class="text-black text-decoration-none" ><button class="bg-transparent border-0 w-100 text-left" >all</button></a></li>
+
       @foreach ($category as $item)
     <li><form action="{{ route('category.sort', ['data'=>$item->id]) }}" method="post" class="dropdown-item">@csrf<button class="bg-transparent border-0 w-100 text-left" type="submit">{{$item->name}}</button></form></li>
     @endforeach
@@ -37,7 +38,7 @@
                 @foreach ($data as $item)
             <tr>
                 
-                <td >{{$no++}}</td>
+               <td >{{$no++}}</td>
                 <td>{{$item -> name}}</td>
                 <td>{{$item -> harga}}</td>
                 <td>{{$item -> category -> name }} </td>
@@ -48,9 +49,7 @@
                     @method('delete')
                     @csrf
                     <button class="bg-transparent px-3 rounded-3 border  text-white">delete</button>
-                </form>
-
-                  </div>
+                </form>  
 </td>
             </tr>
                     

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\datamodel;
+use App\Models\categorymodel;
 
 class DataController extends Controller
 {
@@ -12,9 +13,10 @@ class DataController extends Controller
      */
     public function index()
     {
-        $data = datamodel::all();
+        $category = categorymodel::all();
+        $data = datamodel::with('category')->get();
         $no = 1;
-        return view('tampil', ['data' => $data, 'no' => $no]);
+        return view('tampil', ['data' => $data, 'no' => $no, 'category' => $category]);
     }
 
     /**
@@ -22,7 +24,8 @@ class DataController extends Controller
      */
     public function create()
     {
-        return view('create');
+        $category = categorymodel::all();
+        return view('create', ['categorys' => $category]);
     }
 
     /**
@@ -31,11 +34,13 @@ class DataController extends Controller
     public function store(Request $request)
     {
         $name = $request -> get('name');
-        $jenis = $request -> get('jenis');
+        $harga = $request -> get('harga');
+        $category = $request -> get('category_id');
 
         $post = [
             'name' => $name,
-            'jenis' => $jenis,
+            'harga' => $harga,
+            'category_id' => $category,
         ];
 
         datamodel::create($post);
